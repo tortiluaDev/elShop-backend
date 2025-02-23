@@ -5,6 +5,11 @@ const getCart = (req, res) => {
 	res.json(cart)
 }
 
+const deleteCart = (req, res) => {
+	const cart = cartService.deleteCart()
+	res.json(cart)
+}
+
 const addProduct = (req, res) => {
 	const count = req.body.count ? req.body?.count : 1
 
@@ -19,4 +24,4 @@ const deleteProduct = (req, res) => {
 	res.json(product)
 }
 
-module.exports = { getCart, addProduct, deleteProduct }
+module.exports = { getCart, deleteCart, addProduct, deleteProduct }

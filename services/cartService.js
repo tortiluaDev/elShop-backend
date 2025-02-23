@@ -1,4 +1,5 @@
 const catalogue = require('../data/products.js')
+const getProductsWithImgPaths = require('../utils/getProductsImg')
 
 class cartService {
 	cart = []
@@ -7,10 +8,15 @@ class cartService {
 		return this.cart
 	}
 
+	deleteCart = () => {
+		this.cart = []
+		return this.cart
+	}
+
 	addProduct = (id, count) => {
 		const transformId = id.includes(':') ? id.replace(':', '') : id
 
-		const addedProduct = [...Object.values(catalogue)]
+		const addedProduct = [...Object.values(getProductsWithImgPaths(catalogue))]
 			.flat()
 			.find(product => product.id === transformId)
 
@@ -27,7 +33,9 @@ class cartService {
 	deleteProduct = (id, count) => {
 		const transformId = id.includes(':') ? id.replace(':', '') : id
 
-		const deletedProduct = [...Object.values(catalogue)]
+		const deletedProduct = [
+			...Object.values(getProductsWithImgPaths(catalogue)),
+		]
 			.flat()
 			.find(product => product.id === transformId)
 

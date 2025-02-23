@@ -1,4 +1,5 @@
 const catalogue = require('../data/products.js')
+const getProductsWithImgPaths = require('../utils/getProductsImg')
 
 class favoritesService {
 	favorites = []
@@ -10,7 +11,7 @@ class favoritesService {
 	addFavorite = (id, count) => {
 		const transformId = id.includes(':') ? id.replace(':', '') : id
 
-		const addedProduct = [...Object.values(catalogue)]
+		const addedProduct = [...Object.values(getProductsWithImgPaths(catalogue))]
 			.flat()
 			.find(product => product.id === transformId)
 
@@ -27,7 +28,9 @@ class favoritesService {
 	deleteFavorite = (id, count) => {
 		const transformId = id.includes(':') ? id.replace(':', '') : id
 
-		const deletedProduct = [...Object.values(catalogue)]
+		const deletedProduct = [
+			...Object.values(getProductsWithImgPaths(catalogue)),
+		]
 			.flat()
 			.find(product => product.id === transformId)
 

@@ -1,14 +1,15 @@
 const catalogue = require('../data/products.js')
+const getProductsWithImgPaths = require('../utils/getProductsImg')
 
 class productsService {
 	getAllProducts = () => {
-		return catalogue
+		return getProductsWithImgPaths(catalogue)
 	}
 
 	getProductById = id => {
 		const transformId = id.includes(':') ? id.replace(':', '') : id
 
-		const allProducts = [...Object.values(catalogue)].flat()
+		const allProducts = Object.values(getProductsWithImgPaths(catalogue)).flat()
 		const product = allProducts.find(product => product.id === transformId)
 
 		if (product) {
